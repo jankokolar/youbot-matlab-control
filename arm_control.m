@@ -22,7 +22,7 @@ function varargout = arm_control(varargin)
 
 % Edit the above text to modify the response to help arm_control
 
-% Last Modified by GUIDE v2.5 23-Jul-2014 15:36:31
+% Last Modified by GUIDE v2.5 31-Jul-2014 10:19:24
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -555,3 +555,14 @@ end
 % hObject    handle to apply_plot_select_btn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+handles.youbot_arm_encoder_reader.setOnNewMessageListeners({})
+% Hint: delete(hObject) closes the figure
+delete(hObject);

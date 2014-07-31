@@ -22,7 +22,7 @@ function varargout = gripper_control(varargin)
 
 % Edit the above text to modify the response to help gripper_control
 
-% Last Modified by GUIDE v2.5 18-Jul-2014 10:31:20
+% Last Modified by GUIDE v2.5 31-Jul-2014 10:21:14
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -259,3 +259,13 @@ handles.youbot_gripper_publisher.publish(handles.youbot_gripper_message);
 % hObject    handle to move_gripper_btn (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
+
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+handles.youbot_gripper_encoder_reader.setOnNewMessageListeners({});
+% Hint: delete(hObject) closes the figure
+delete(hObject);

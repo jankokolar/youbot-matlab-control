@@ -271,16 +271,28 @@ else
    %Close base, arm and gripper control windows if they are opened
    
    if (isfield(handles,'base_ctrl_handle'))&&(isfield(handles,'base_ctrl_opened'))&&(handles.base_ctrl_opened == 1)
-       delete(handles.base_ctrl_handle) ;
+       try
+           delete(handles.base_ctrl_handle) ;
+       catch
+            disp('Hmm, base window seems to be already closed');
+       end
        handles.base_ctrl_opened = 0;
    end
    if (isfield(handles,'arm_ctrl_handle'))&&(isfield(handles,'arm_ctrl_opened'))&&(handles.arm_ctrl_opened == 1)
-       delete(handles.arm_ctrl_handle) ; 
+       try
+           delete(handles.arm_ctrl_handle);
+       catch
+           disp('Hmm, arm window seems to be already closed');
+       end
        handles.arm_ctrl_opened = 0;
    end
    
    if (isfield(handles,'gripper_ctrl_handle'))&&(isfield(handles,'gripper_ctrl_opened'))&&(handles.gripper_ctrl_opened == 1)
-       delete (handles.gripper_ctrl_handle);
+       try
+           delete(handles.gripper_ctrl_handle);
+       catch
+           disp('Hmm, gripper window seems to be already closed');
+       end
        handles.gripper_ctrl_opened = 0;
    end
    

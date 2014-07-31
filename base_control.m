@@ -22,7 +22,7 @@ function varargout = base_control(varargin)
 
 % Edit the above text to modify the response to help base_control
 
-% Last Modified by GUIDE v2.5 25-Jul-2014 15:12:47
+% Last Modified by GUIDE v2.5 31-Jul-2014 10:08:23
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -126,7 +126,7 @@ caster_br_speed_plot = plot(4*ones(1,100),'m');
 %axis([0 100 -20 20]);
 ylabel('Joint  speed  [rad/s]');
 
-%apply_plot_select_btn_Callback(hObject, eventdata, handles);
+apply_base_plot_btn_Callback(hObject, eventdata, handles);
 
 youbot_base_encoder_reader.setOnNewMessageListeners({@youbot_base_encoders})
 
@@ -366,7 +366,7 @@ if button_state == get(hObject,'Max')
     
     handles.youbot_base_message.getAngular.setX(0);
     handles.youbot_base_message.getAngular.setY(0);
-    handles.youbot_base_message.getAngular.setZ(vel);
+    handles.youbot_base_message.getAngular.setZ(-1.0*vel);
     
     handles.youbot_base_publisher.publish(handles.youbot_base_message);
 
@@ -407,7 +407,7 @@ if button_state == get(hObject,'Max')
     
     handles.youbot_base_message.getAngular.setX(0);
     handles.youbot_base_message.getAngular.setY(0);
-    handles.youbot_base_message.getAngular.setZ(-1.0*vel);
+    handles.youbot_base_message.getAngular.setZ(vel);
     
     handles.youbot_base_publisher.publish(handles.youbot_base_message);
 
@@ -797,3 +797,14 @@ else
     set(caster_br_position_plot,'Visible','off');
     set(caster_br_speed_plot,'Visible','off');
 end
+
+
+% --- Executes when user attempts to close figure1.
+function figure1_CloseRequestFcn(hObject, eventdata, handles)
+% hObject    handle to figure1 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+handles.youbot_base_encoder_reader.setOnNewMessageListeners({});
+% Hint: delete(hObject) closes the figure
+delete(hObject);
